@@ -1,0 +1,35 @@
+.featured__section {
+  text-align: center;
+}
+
+.featured__products {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.featured {
+  margin: 1%;
+  display: flex;
+  height: 25vh;
+  width: 40vh;
+  /* width: 50vh; */
+
+  box-shadow: 1px 0px 5px grey;
+  border-radius: 4px;
+  padding: 1%;
+}
+
+.featured__details {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5%;
+}
+.featutred__imgDiv {
+  border: 1px solid rgba(128, 128, 128, 0.182);
+  display: flex;
+  width: 100%;
+}
+.featutred__imgDiv img {
+  width: 100%;
+}
