@@ -1,20 +1,19 @@
 import React, { useContext, useEffect, useState } from "react"
 
 import { MdOutlineFavoriteBorder } from "react-icons/md"
-
-import { ProductContext } from "./context/Context"
-import { CartContext } from "./context/CartContext"
-import Rating from "./Rating/Rating"
 import AddIcon from "./AddIcon"
-// import ProductBtns from "./ProductBtns"
+
+import Rating from "./Rating/Rating"
+
+import CartContext2 from "./context/cart-context"
+import { ProductContext } from "./context/Context"
 
 const BestSeller = () => {
   const productsData = useContext(ProductContext)
   const [category, setCategory] = useState(productsData)
-  //   const [loading, setLoading] = useState(true)
   const [showMore, setShowMore] = useState(false)
 
-  const [cart, setCart] = useContext(CartContext)
+  const cartCtx = useContext(CartContext2)
 
   useEffect(() => {
     let products = productsData.filter((item) => item.category !== "Featured")
@@ -26,7 +25,6 @@ const BestSeller = () => {
   }, [showMore, productsData])
 
   const showCategoryHandler = (e) => {
-    // console.log(e.target.name)
     let category = e.target.name
     if (category === "All") {
       let products = productsData.filter((item) => item.category !== "Featured")
@@ -43,20 +41,23 @@ const BestSeller = () => {
       setCategory(productsData.filter((item) => item.category === category))
     }
   }
-  //   console.log(category)
 
   const showMoreHandle = () => {
     setShowMore((prev) => !prev)
   }
 
   const addToCartHandler = (e) => {
-    let newId = {
-      id: e.target.id,
-      qty: 0,
-    }
-    setCart([...cart, newId])
+    let selectedItem = category.filter((item) => item.id === e.target.id)
+    cartCtx.addItem({
+      id: selectedItem[0].id,
+      name: selectedItem[0].title,
+      price: selectedItem[0].price,
+      image: selectedItem[0].image,
+      category: selectedItem[0].category,
+      rating: selectedItem[0].rating,
+      amount: 1,
+    })
   }
-  // console.log("cart", cart)
   return (
     <>
       <div className="bestSeller">

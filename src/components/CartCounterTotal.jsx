@@ -1,18 +1,6 @@
-import React, { useEffect, useState } from "react"
-import { useContext } from "react"
-import { NavLink } from "react-router-dom"
-import { CartContext } from "./context/CartContext"
+import React from "react"
 
-export default function CartCounterTotal() {
-  const [cartData] = useContext(CartContext)
-  const [subTotal, setSubTotal] = useState(0)
-
-  useEffect(() => {
-    setSubTotal(
-      cartData.map((item) => +item.qty).reduce((sum, ele) => sum + ele) * 499
-    )
-  }, [cartData])
-  //   console.log(cartData)
+export default function CartCounterTotal({ total }) {
   return (
     <div className="cart__counterDiv">
       <div className="cart__counter">
@@ -20,12 +8,7 @@ export default function CartCounterTotal() {
         <div className="cart__counter-details">
           <div>
             <p>Subtotal</p>
-            <p>
-              $
-              {cartData
-                .map((item) => +item.qty)
-                .reduce((sum, ele) => sum + ele) * 499}
-            </p>
+            <p>${total}</p>
           </div>
           <div>
             <p>Shipping fee</p>
@@ -39,15 +22,10 @@ export default function CartCounterTotal() {
         <hr />
         <div className="cart__counter-total">
           <h2>TOTAL</h2>
-          <h2>${subTotal + 20}</h2>
+          <h2>${total + 20}</h2>
         </div>
         <div className="checkout-btnsDiv">
           <button className="cart__checkout-btn">Check-out</button>
-          <button className="cart__checkout-goBack">
-            <NavLink to={"/cart"} className="link">
-              Go back
-            </NavLink>
-          </button>
         </div>
       </div>
     </div>

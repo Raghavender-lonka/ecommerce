@@ -1,24 +1,29 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 
 import Rating from "./Rating/Rating"
-import { CartContext } from "./context/CartContext"
+import { ProductContext } from "./context/Context"
+import CartContext2 from "./context/cart-context"
 
 import { MdOutlineFavoriteBorder } from "react-icons/md"
 import AddIcon from "./AddIcon"
 
 export default function StoreProducts(props) {
-  const { category } = props
-
-  const [cart, setCart] = useContext(CartContext)
+  const productsData = useContext(ProductContext)
+  const [product] = useState(productsData)
+  const cartCtx = useContext(CartContext2)
 
   const addToCartHandler = (e) => {
-    let newId = {
-      id: e.target.id,
-      qty: 0,
-    }
-    setCart([...cart, newId])
+    let selectedItem = product.filter((item) => item.id === e.target.id)
+    cartCtx.addItem({
+      id: selectedItem[0].id,
+      name: selectedItem[0].title,
+      price: selectedItem[0].price,
+      image: selectedItem[0].image,
+      category: selectedItem[0].category,
+      rating: selectedItem[0].rating,
+      amount: 1,
+    })
   }
-  // console.log("store", cart)
 
   return (
     <>
@@ -46,7 +51,7 @@ export default function StoreProducts(props) {
         </div>
       </div> */}
       <div className="store__products-container">
-        {category.map((item) => (
+        {product.map((item) => (
           <div className="store__products" key={item.id}>
             <div className="store__product">
               <img

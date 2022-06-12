@@ -170,7 +170,6 @@ Home
   position: relative;
   bottom: 70px;
   height: 64.5vh;
-  width: 100%;
 }
 
 /* 
@@ -622,11 +621,12 @@ cart
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10vh 0;
+  /* margin: 10vh 0; */
+  width: 30%;
 }
 
 .cart__counter {
-  width: 25%;
+  width: 100%;
 }
 
 .cart__counter-details div,
@@ -779,7 +779,7 @@ counter
 
 .noProducts {
   text-align: center;
-  margin: 20vh 0 30vh 0;
+  margin: 20vh 0 40vh 0;
 }
 .banner__img-moblie {
   display: none;
